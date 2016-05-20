@@ -73,3 +73,41 @@ Connection.ResponseReceived += requestReceiver.OnResponseReceived;
 
 In the current state of this library, the RequestReceiver **HAS** to subscribe to the static connection class.
 In later stages I will try to figure out a better approach (or maybe you have a better idea?).
+
+##Sending requests / processing requests / sending back responses
+
+To send a request, just use the RequestReceiver instance you have created above. The response will be returned asynchroniously when the server has processed the request.
+
+```
+var response = await requestReceiver.ReadAsync<TestResponse>(new TestRequest { Test = "Hello Server!" });
+```
+
+The request handler could look like this:
+
+```
+public class TestRequestHandler : BaseRequestHandler<TestRequest>
+{
+    protected override async Task<BaseResponse> ExecuteAsync(TestRequest request)
+    { 
+        return new TestResponse { Text = "Hello client!" };
+    }
+}
+```
+
+##Logging
+
+Both the server and the client support basic logging.
+
+###Server logging
+
+To enable logging, you have to initialize the server with another parameter, which is the logger.
+
+```
+requestResponseServer.Init(new SimpleRequestHandlerFactory(), myLogger);
+```
+
+*myLogger* has to be an implementation of the ```IServerLogger```
+
+###Client logging
+
+WIP
