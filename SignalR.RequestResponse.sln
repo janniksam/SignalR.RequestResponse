@@ -1,0 +1,134 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{5949CA8D-ADC8-4D4A-BBEA-D11109A1637A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{5F91C131-38E5-4162-81A9-3B8C1FCEEED6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{69E8C080-B4EE-449C-9008-A81516A64A56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{B6D77620-B398-40BC-B8AC-45F284676E7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{CCFE49FF-A7D0-4A8D-823D-6A6B955D7F1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{67A0DA5F-2865-4EA4-9A8B-13792082AC83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{3932EDD3-B6F0-467A-AE21-0FD5B122D07B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{E41359EA-DCED-47B5-9AF6-9FEB3628A522}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "Examples\TestClient\TestClient.csproj", "{C727DF5C-6131-4D5F-9EE5-99313F215C56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServer", "Examples\TestServer\TestServer.csproj", "{7FB5C98D-267D-407D-B6BD-7220F12C9FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServer.Application", "Examples\TestServer.Application\TestServer.Application.csproj", "{B72EF538-471C-4701-A66E-0F4D362C3C11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ClientServer.Shared", "Examples\Test.ClientServer.Shared\Test.ClientServer.Shared.csproj", "{9D2A76E3-40D9-414C-B444-9ED7A53C8BA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Request.Response.Client", "src\Client\SignalR.Request.Response.Client\SignalR.Request.Response.Client.csproj", "{027241C3-20C3-4871-97A8-6DF5654079DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Request.Response.Server", "src\Server\SignalR.Request.Response.Server\SignalR.Request.Response.Server.csproj", "{54C91C97-63D0-4E84-8CCA-582458228DD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Request.Response.Server.RequestHandler", "src\Server\SignalR.Request.Response.Server.RequestHandler\SignalR.Request.Response.Server.RequestHandler.csproj", "{826DDCD0-84BF-476B-94F4-72426104A14B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Request.Response.Shared", "src\Shared\SignalR.Request.Response.Shared\SignalR.Request.Response.Shared.csproj", "{2F959F5E-9A82-4A17-BD6D-963AB46B0038}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C727DF5C-6131-4D5F-9EE5-99313F215C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C727DF5C-6131-4D5F-9EE5-99313F215C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C727DF5C-6131-4D5F-9EE5-99313F215C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C727DF5C-6131-4D5F-9EE5-99313F215C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FB5C98D-267D-407D-B6BD-7220F12C9FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FB5C98D-267D-407D-B6BD-7220F12C9FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FB5C98D-267D-407D-B6BD-7220F12C9FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FB5C98D-267D-407D-B6BD-7220F12C9FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B72EF538-471C-4701-A66E-0F4D362C3C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72EF538-471C-4701-A66E-0F4D362C3C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72EF538-471C-4701-A66E-0F4D362C3C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72EF538-471C-4701-A66E-0F4D362C3C11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D2A76E3-40D9-414C-B444-9ED7A53C8BA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D2A76E3-40D9-414C-B444-9ED7A53C8BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D2A76E3-40D9-414C-B444-9ED7A53C8BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D2A76E3-40D9-414C-B444-9ED7A53C8BA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027241C3-20C3-4871-97A8-6DF5654079DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027241C3-20C3-4871-97A8-6DF5654079DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027241C3-20C3-4871-97A8-6DF5654079DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027241C3-20C3-4871-97A8-6DF5654079DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C91C97-63D0-4E84-8CCA-582458228DD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C91C97-63D0-4E84-8CCA-582458228DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C91C97-63D0-4E84-8CCA-582458228DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C91C97-63D0-4E84-8CCA-582458228DD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826DDCD0-84BF-476B-94F4-72426104A14B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826DDCD0-84BF-476B-94F4-72426104A14B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826DDCD0-84BF-476B-94F4-72426104A14B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826DDCD0-84BF-476B-94F4-72426104A14B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F959F5E-9A82-4A17-BD6D-963AB46B0038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F959F5E-9A82-4A17-BD6D-963AB46B0038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F959F5E-9A82-4A17-BD6D-963AB46B0038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F959F5E-9A82-4A17-BD6D-963AB46B0038}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5949CA8D-ADC8-4D4A-BBEA-D11109A1637A} = {3932EDD3-B6F0-467A-AE21-0FD5B122D07B}
+		{5F91C131-38E5-4162-81A9-3B8C1FCEEED6} = {3932EDD3-B6F0-467A-AE21-0FD5B122D07B}
+		{B6D77620-B398-40BC-B8AC-45F284676E7E} = {69E8C080-B4EE-449C-9008-A81516A64A56}
+		{CCFE49FF-A7D0-4A8D-823D-6A6B955D7F1D} = {69E8C080-B4EE-449C-9008-A81516A64A56}
+		{67A0DA5F-2865-4EA4-9A8B-13792082AC83} = {69E8C080-B4EE-449C-9008-A81516A64A56}
+		{E41359EA-DCED-47B5-9AF6-9FEB3628A522} = {3932EDD3-B6F0-467A-AE21-0FD5B122D07B}
+		{C727DF5C-6131-4D5F-9EE5-99313F215C56} = {CCFE49FF-A7D0-4A8D-823D-6A6B955D7F1D}
+		{7FB5C98D-267D-407D-B6BD-7220F12C9FBC} = {B6D77620-B398-40BC-B8AC-45F284676E7E}
+		{B72EF538-471C-4701-A66E-0F4D362C3C11} = {B6D77620-B398-40BC-B8AC-45F284676E7E}
+		{9D2A76E3-40D9-414C-B444-9ED7A53C8BA1} = {67A0DA5F-2865-4EA4-9A8B-13792082AC83}
+		{027241C3-20C3-4871-97A8-6DF5654079DE} = {5F91C131-38E5-4162-81A9-3B8C1FCEEED6}
+		{54C91C97-63D0-4E84-8CCA-582458228DD1} = {5949CA8D-ADC8-4D4A-BBEA-D11109A1637A}
+		{826DDCD0-84BF-476B-94F4-72426104A14B} = {5949CA8D-ADC8-4D4A-BBEA-D11109A1637A}
+		{2F959F5E-9A82-4A17-BD6D-963AB46B0038} = {E41359EA-DCED-47B5-9AF6-9FEB3628A522}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://jannik-sam.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Examples\\TestClient\\TestClient.csproj
+		SccProjectTopLevelParentUniqueName1 = SignalR.RequestResponse.sln
+		SccProjectName1 = Examples/TestClient
+		SccLocalPath1 = Examples\\TestClient
+		SccProjectUniqueName2 = Examples\\TestServer\\TestServer.csproj
+		SccProjectTopLevelParentUniqueName2 = SignalR.RequestResponse.sln
+		SccProjectName2 = Examples/TestServer
+		SccLocalPath2 = Examples\\TestServer
+		SccProjectUniqueName3 = Examples\\TestServer.Application\\TestServer.Application.csproj
+		SccProjectTopLevelParentUniqueName3 = SignalR.RequestResponse.sln
+		SccProjectName3 = Examples/TestServer.Application
+		SccLocalPath3 = Examples\\TestServer.Application
+		SccProjectUniqueName4 = Examples\\Test.ClientServer.Shared\\Test.ClientServer.Shared.csproj
+		SccProjectTopLevelParentUniqueName4 = SignalR.RequestResponse.sln
+		SccProjectName4 = Examples/Test.ClientServer.Shared
+		SccLocalPath4 = Examples\\Test.ClientServer.Shared
+		SccProjectUniqueName5 = src\\Client\\SignalR.Request.Response.Client\\SignalR.Request.Response.Client.csproj
+		SccProjectTopLevelParentUniqueName5 = SignalR.RequestResponse.sln
+		SccProjectName5 = src/Client/SignalR.Request.Response.Client
+		SccLocalPath5 = src\\Client\\SignalR.Request.Response.Client
+		SccProjectUniqueName6 = src\\Server\\SignalR.Request.Response.Server\\SignalR.Request.Response.Server.csproj
+		SccProjectTopLevelParentUniqueName6 = SignalR.RequestResponse.sln
+		SccProjectName6 = src/Server/SignalR.Request.Response.Server
+		SccLocalPath6 = src\\Server\\SignalR.Request.Response.Server
+		SccProjectUniqueName7 = src\\Server\\SignalR.Request.Response.Server.RequestHandler\\SignalR.Request.Response.Server.RequestHandler.csproj
+		SccProjectTopLevelParentUniqueName7 = SignalR.RequestResponse.sln
+		SccProjectName7 = src/Server/SignalR.Request.Response.Server.RequestHandler
+		SccLocalPath7 = src\\Server\\SignalR.Request.Response.Server.RequestHandler
+		SccProjectUniqueName8 = src\\Shared\\SignalR.Request.Response.Shared\\SignalR.Request.Response.Shared.csproj
+		SccProjectTopLevelParentUniqueName8 = SignalR.RequestResponse.sln
+		SccProjectName8 = src/Shared/SignalR.Request.Response.Shared
+		SccLocalPath8 = src\\Shared\\SignalR.Request.Response.Shared
+	EndGlobalSection
+EndGlobal
