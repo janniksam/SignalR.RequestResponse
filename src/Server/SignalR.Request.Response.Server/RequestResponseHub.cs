@@ -37,7 +37,7 @@ namespace SignalR.Request.Response.Server
 
         public async void OnRequestReceived(SignalRRequest request)
         {
-            m_serverLogger.LogInfo(string.Format("New request received: {0}",request.TypeName));
+            m_serverLogger.LogInfo(string.Format("New request received: {0}", request.TypeName));
             var handler = m_requestHandlerFactoryFactory.GetHandlerFor(request.TypeName);
             if (handler == null)
             {

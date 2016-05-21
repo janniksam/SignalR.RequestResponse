@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SignalR.Request.Response.Client.ExceptionHandling
+namespace SignalR.Request.Response.Client.ExceptionHandling.Exceptions
 {
     public class ConnectionLostException : Exception
     {

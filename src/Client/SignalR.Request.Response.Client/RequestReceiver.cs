@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Composition;
-using System.Linq;
 using System.Threading.Tasks;
 using SignalR.Request.Response.Shared;
 using SignalR.Request.Response.Shared.Logging;
+using SignalR.Request.Response.Client.ExceptionHandling;
+using SignalR.Request.Response.Client.ExceptionHandling.Exceptions;
+using System.Diagnostics;
 
 namespace SignalR.Request.Response.Client
 {
@@ -31,6 +33,7 @@ namespace SignalR.Request.Response.Client
             };
 
             m_logger.LogInfo(string.Format("Sending request: {0}, ID: {1}", wrappedRequest.TypeName, wrappedRequest.RequestId));
+
             Connection.SendReceive(wrappedRequest);
 
             m_logger.LogInfo(string.Format("Waiting for response: {0}, ID: {1}", wrappedRequest.TypeName, wrappedRequest.RequestId));
@@ -48,6 +51,15 @@ namespace SignalR.Request.Response.Client
 
         private async Task<TResponse> GetResponse<TResponse>(Guid requestId) where TResponse : BaseResponse
         {
+            if(Connection.Options == null)
+            {
+                new ConnectionLostException(string.Format("The connection was lost during the request with ID={0}", requestId), null).LogAndThrow();
+            }
+
+            int timeoutMs = Connection.Options.TimeoutWaitingForResponse * 1000;
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             SignalRResponse response;
             do
             {
@@ -58,16 +70,22 @@ namespace SignalR.Request.Response.Client
                         m_responseDictionary.Remove(requestId);
                     }
                 }
-                await Task.Delay(50);
+
+                if (stopWatch.ElapsedMilliseconds > timeoutMs)
+                {
+                    new RequestTimedOutException(string.Format("Request with the Id={0} timed out.", requestId)).LogAndThrow();
+                }
+                 
+                await Task.Delay(30);
             } while (response == null);
 
             if (response.Aborted)
             {
-                m_logger.LogError(string.Format("The request {0} was aborted by the server, ID: {1}",  typeof(TResponse).Name, requestId));
-                throw new Exception(string.Format("The request {0} was aborted by the server, ID: {1}", typeof(TResponse).Name, requestId));
+                new RequestAbortedException(string.Format("The request {0} was aborted by the server, ID: {1}", typeof(TResponse).Name, requestId))
+                    .LogAndThrow();
             }
 
-            m_logger.LogInfo(string.Format("Response received: {0}, ID: {1}", typeof(TResponse).Name, requestId));
+            m_logger.LogInfo(string.Format("Response received: {0}, RequestID: {1}", typeof(TResponse).Name, requestId));
             var serializedResponse = Serializer.DeserializeObject<TResponse>(response.SerializedResponse);
             return serializedResponse;
         }

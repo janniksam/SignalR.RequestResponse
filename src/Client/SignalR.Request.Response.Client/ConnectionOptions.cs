@@ -5,10 +5,12 @@ namespace SignalR.Request.Response.Client
         public ConnectionOptions(string uri)
         {
             Uri = uri;
-            Timeout = 60;
+            TransportConnectTimeout = 60;
+            TimeoutWaitingForResponse = 60;
         }
 
         public string Uri { get; set; }
-        public int Timeout { get; set; }
+        public int TransportConnectTimeout { get; set; }
+        public int TimeoutWaitingForResponse { get; set; }
     }
 }

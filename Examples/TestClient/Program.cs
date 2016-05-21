@@ -10,6 +10,9 @@ namespace TestClient
         {
             Program p = new Program();
             p.Run();
+            do
+            {
+            } while (true);
         }
 
         private async void Run()
