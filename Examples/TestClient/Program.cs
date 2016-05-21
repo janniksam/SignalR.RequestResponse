@@ -10,9 +10,6 @@ namespace TestClient
         {
             Program p = new Program();
             p.Run();
-            while (Console.ReadLine() != "quit")
-            {
-            }
         }
 
         private async void Run()
@@ -29,7 +26,7 @@ namespace TestClient
             do
             {
                 var response = await requestReceiver.ReadAsync<TestResponse>(new TestRequest { Test = "Hello Server!" });
-                requestExecutor.Execute(new MyRequest {Hessage = "Hello Server with responseless request" });
+                requestExecutor.Execute(new MyRequest { Hessage = "Hello Server with responseless request" });
                 Console.WriteLine(response.Text);
             } while (true);
 

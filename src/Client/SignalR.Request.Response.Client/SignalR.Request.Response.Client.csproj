@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Connection.cs" />
     <Compile Include="ConnectionOptions.cs" />
+    <Compile Include="ExceptionHandling\ConnectionCouldNotBeEstablishedException.cs" />
+    <Compile Include="ExceptionHandling\ConnectionLostException.cs" />
     <Compile Include="IRequestExecutor.cs" />
     <Compile Include="IRequestReceiver.cs" />
     <Compile Include="RequestExecutor.cs" />

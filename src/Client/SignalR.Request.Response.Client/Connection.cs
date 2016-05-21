@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 using SignalR.Request.Response.Shared;
 using SignalR.Request.Response.Shared.Logging;
+using SignalR.Request.Response.Client.ExceptionHandling;
+using System.Net.Http;
 
 namespace SignalR.Request.Response.Client
 {
@@ -47,11 +49,20 @@ namespace SignalR.Request.Response.Client
                 throw new ArgumentNullException(nameof(connectionOptions));
             }
             Logger.LogInfo(string.Format("Trying to connect to {0}", connectionOptions.Uri));
-            m_requestResponseConnection = new HubConnection(connectionOptions.Uri);
-            m_requestResponseConnection.TransportConnectTimeout = TimeSpan.FromSeconds(connectionOptions.Timeout);
-            m_proxy = m_requestResponseConnection.CreateHubProxy("RequestResponseHub");
-            m_proxy.On<SignalRResponse>("OnResponseReceived", OnResponseReceived);
-            await m_requestResponseConnection.Start();
+
+            try
+            {
+                m_requestResponseConnection = new HubConnection(connectionOptions.Uri);
+                m_requestResponseConnection.TransportConnectTimeout = TimeSpan.FromSeconds(connectionOptions.Timeout);
+                m_proxy = m_requestResponseConnection.CreateHubProxy("RequestResponseHub");
+                m_proxy.On<SignalRResponse>("OnResponseReceived", OnResponseReceived);
+                await m_requestResponseConnection.Start();
+            }
+            catch(HttpRequestException e)
+            {
+                throw new ConnectionCouldNotBeEstablishedException("Could not connect to server.", e);
+            }
+
             Logger.LogInfo(string.Format("Connection successfully established to {0}", connectionOptions.Uri));
         }
 
@@ -78,7 +89,18 @@ namespace SignalR.Request.Response.Client
                 Logger.LogError("RequestId cannot be null");
                 throw new Exception("RequestId cannot be null");
             }
-            m_proxy.Invoke("OnRequestReceived", request);
+            try
+            {
+                m_proxy.Invoke("OnRequestReceived", request);
+            }
+            catch(InvalidOperationException e)
+            {
+                if (e.Message.Contains("Data cannot be sent because the connection is in the disconnected state. Call start before sending any data."))
+                {
+                    throw new ConnectionLostException("The connection to the server was lost.", e);
+                }
+                throw e;
+            }
         }
 
         public static void SendExecute(SignalRRequest request)
