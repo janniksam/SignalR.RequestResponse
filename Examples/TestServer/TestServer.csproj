@@ -65,10 +65,6 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SignalR.Request.Response.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SignalR.Request.Response.Shared.0.0.0.4\lib\portable-net45+win+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\SignalR.Request.Response.Shared.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -94,6 +90,10 @@
     <ProjectReference Include="..\..\src\Server\SignalR.Request.Response.Server\SignalR.Request.Response.Server.csproj">
       <Project>{54c91c97-63d0-4e84-8cca-582458228dd1}</Project>
       <Name>SignalR.Request.Response.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Shared\SignalR.Request.Response.Shared\SignalR.Request.Response.Shared.csproj">
+      <Project>{2f959f5e-9a82-4a17-bd6d-963ab46b0038}</Project>
+      <Name>SignalR.Request.Response.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestServer.Application\TestServer.Application.csproj">
       <Project>{B72EF538-471C-4701-A66E-0F4D362C3C11}</Project>

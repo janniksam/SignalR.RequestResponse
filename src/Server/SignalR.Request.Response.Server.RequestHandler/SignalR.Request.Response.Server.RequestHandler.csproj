@@ -34,10 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SignalR.Request.Response.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\SignalR.Request.Response.Shared.0.0.0.4\lib\portable-net45+win+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\SignalR.Request.Response.Shared.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -51,7 +47,10 @@
     <Compile Include="RequestHandlerContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\Shared\SignalR.Request.Response.Shared\SignalR.Request.Response.Shared.csproj">
+      <Project>{2f959f5e-9a82-4a17-bd6d-963ab46b0038}</Project>
+      <Name>SignalR.Request.Response.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
