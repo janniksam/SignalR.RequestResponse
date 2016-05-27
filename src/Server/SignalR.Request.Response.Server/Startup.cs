@@ -20,7 +20,7 @@ namespace SignalR.Request.Response.Server
             var logger = GDInternalResources.Logger;
 
             GlobalHost.DependencyResolver.Register(typeof(RequestResponseHub), () => new RequestResponseHub(requestHandlerFactory, logger));
-
+            
             app.UseCors(CorsOptions.AllowAll);
             app.MapSignalR();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using SignalR.Request.Response.Client;
 using Test.ClientServer.Shared;
+using Connection = SignalR.Request.Response.Client.Connection;
 
 namespace TestClient
 {
