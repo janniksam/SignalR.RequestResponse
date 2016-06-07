@@ -103,7 +103,7 @@ Both the server and the client support basic logging.
 
 ###Server logging
 
-To enable logging, you have to initialize the server with another parameter, which is the logger.
+To enable server logging, you have to initialize the server with another parameter, which is the logger.
 
 ```
 requestResponseServer.Init(new SimpleRequestHandlerFactory(), myLogger);
@@ -113,4 +113,10 @@ requestResponseServer.Init(new SimpleRequestHandlerFactory(), myLogger);
 
 ###Client logging
 
-Currently not supported, there is a IClientLogger-interface provided, but it isn't used so far.
+To enable server logging, you have to register a logger at the ```Connection``` class.
+
+```
+Connection.InitializeLogger(myLogger);
+```
+
+*myLogger* has to be an implementation of the provided ```IClientLogger``` interface.
