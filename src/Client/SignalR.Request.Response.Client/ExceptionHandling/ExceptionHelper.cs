@@ -1,12 +1,13 @@
-﻿using System;
+﻿using SignalR.Request.Response.Shared.Logging;
+using System;
 
 namespace SignalR.Request.Response.Client.ExceptionHandling
 {
     public static class ExceptionHelper
     {
-        public static void LogAndThrow(this Exception exception)
+        public static void LogAndThrow(this IClientLogger logger, Exception exception)
         {
-            Connection.Logger.LogError(exception.Message);
+            logger.LogError(exception.Message);
             throw exception;
         }
     }

@@ -1,13 +1,12 @@
 ﻿using System;
 using SignalR.Request.Response.Client;
 using Test.ClientServer.Shared;
-using Connection = SignalR.Request.Response.Client.Connection;
 
 namespace TestClient
 {
     class Program
     {
-        static void Main()
+        private static void Main()
         {
             Program p = new Program();
             p.Run();
@@ -20,13 +19,13 @@ namespace TestClient
         {
             Console.WriteLine("Client Start");
 
-            IRequestReceiver requestReceiver = new RequestReceiver();
-            RequestExecutor requestExecutor = new RequestExecutor();
-
-            Connection.ResponseReceived += requestReceiver.OnResponseReceived;
-
+            var connection = new SignalRConnection();
+            
             var connectionOptions = new ConnectionOptions("http://127.0.0.1:15117/signalr");
-            await Connection.Connect(connectionOptions);
+            await connection.Connect(connectionOptions);
+
+            var requestReceiver = new RequestReceiver(connection);
+            var requestExecutor = new RequestExecutor(connection);
             do
             {
                 var response = await requestReceiver.ReadAsync<TestResponse>(new TestRequest { Test = "Hello Server!" });

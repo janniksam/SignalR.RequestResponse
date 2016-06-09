@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Composition;
 using System.Threading.Tasks;
 using SignalR.Request.Response.Shared;
 using SignalR.Request.Response.Shared.Logging;
@@ -10,16 +9,26 @@ using System.Diagnostics;
 
 namespace SignalR.Request.Response.Client
 {
-    [Export(typeof(IRequestReceiver))]
     public class RequestReceiver : IRequestReceiver
     {
         private readonly Dictionary<Guid, SignalRResponse> m_responseDictionary;
         private readonly IClientLogger m_logger;
-
-        public RequestReceiver()
+        private readonly ISignalRConnection m_signalRConnection;
+        
+        public RequestReceiver(ISignalRConnection signalRConnection)
         {
-            m_logger = Connection.Logger;
+            m_signalRConnection = signalRConnection;
+            m_signalRConnection.ResponseReceived += OnResponseReceived;
+            m_logger = signalRConnection.Options.Logger;
             m_responseDictionary = new Dictionary<Guid, SignalRResponse>();
+        }
+
+        ~RequestReceiver()
+        {
+            if (m_signalRConnection != null)
+            {
+                m_signalRConnection.ResponseReceived -= OnResponseReceived;
+            }
         }
 
         public async Task<TResponse> ReadAsync<TResponse>(BaseRequest request) where TResponse : BaseResponse
@@ -33,8 +42,7 @@ namespace SignalR.Request.Response.Client
             };
 
             m_logger.LogInfo(string.Format("Sending request: {0}, ID: {1}", wrappedRequest.TypeName, wrappedRequest.RequestId));
-
-            Connection.SendReceive(wrappedRequest);
+            m_signalRConnection.SendReceive(wrappedRequest);
 
             m_logger.LogInfo(string.Format("Waiting for response: {0}, ID: {1}", wrappedRequest.TypeName, wrappedRequest.RequestId));
             var response = await GetResponse<TResponse>(wrappedRequest.RequestId);
@@ -51,12 +59,12 @@ namespace SignalR.Request.Response.Client
 
         private async Task<TResponse> GetResponse<TResponse>(Guid requestId) where TResponse : BaseResponse
         {
-            if(Connection.Options == null)
+            if(!m_signalRConnection.IsInitialized)
             {
-                new ConnectionLostException(string.Format("The connection was lost during the request with ID={0}", requestId), null).LogAndThrow();
+                m_logger.LogAndThrow(new ConnectionLostException(string.Format("The connection was lost during the request with ID={0}", requestId), null));
             }
 
-            int timeoutMs = Connection.Options.TimeoutWaitingForResponse * 1000;
+            int timeoutMs = m_signalRConnection.Options.TimeoutWaitingForResponse * 1000;
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
 
@@ -73,7 +81,7 @@ namespace SignalR.Request.Response.Client
 
                 if (stopWatch.ElapsedMilliseconds > timeoutMs)
                 {
-                    new RequestTimedOutException(string.Format("Request with the Id={0} timed out.", requestId)).LogAndThrow();
+                    m_logger.LogAndThrow(new RequestTimedOutException(string.Format("Request with the Id={0} timed out.", requestId)));
                 }
                  
                 await Task.Delay(30);
@@ -81,8 +89,7 @@ namespace SignalR.Request.Response.Client
 
             if (response.Aborted)
             {
-                new RequestAbortedException(string.Format("The request {0} was aborted by the server, ID: {1}", typeof(TResponse).Name, requestId))
-                    .LogAndThrow();
+                m_logger.LogAndThrow(new RequestAbortedException(string.Format("The request {0} was aborted by the server, ID: {1}", typeof(TResponse).Name, requestId)));
             }
 
             m_logger.LogInfo(string.Format("Response received: {0}, RequestID: {1}", typeof(TResponse).Name, requestId));
