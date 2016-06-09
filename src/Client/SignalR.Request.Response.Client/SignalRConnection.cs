@@ -14,21 +14,16 @@ namespace SignalR.Request.Response.Client
     {
         private HubConnection m_requestResponseConnection;
         private IHubProxy m_proxy;
-        private IClientLogger m_logger;
 
         public IClientLogger Logger
         {
             get
             {
-                if (m_logger == null)
+                if (!IsInitialized)
                 {
-                    m_logger = new NoLogClientLogger();
+                    return new NoLogClientLogger();
                 }
-                return m_logger;
-            }
-            set
-            {
-                m_logger = value;
+                return Options.Logger;
             }
         }
 
@@ -77,8 +72,10 @@ namespace SignalR.Request.Response.Client
 
             try
             {
-                m_requestResponseConnection = new HubConnection(Options.Uri);
-                m_requestResponseConnection.TransportConnectTimeout = TimeSpan.FromSeconds(Options.TransportConnectTimeout);
+                m_requestResponseConnection = new HubConnection(Options.Uri)
+                {
+                    TransportConnectTimeout = TimeSpan.FromSeconds(Options.TransportConnectTimeout)
+                };
                 m_proxy = m_requestResponseConnection.CreateHubProxy("RequestResponseHub");
                 m_proxy.On<SignalRResponse>("OnResponseReceived", OnResponseReceived);
                 await m_requestResponseConnection.Start();

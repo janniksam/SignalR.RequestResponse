@@ -1,5 +1,6 @@
 ﻿using System;
 using SignalR.Request.Response.Client;
+using SignalR.Request.Response.Shared.Logging;
 using Test.ClientServer.Shared;
 
 namespace TestClient
@@ -20,8 +21,9 @@ namespace TestClient
             Console.WriteLine("Client Start");
 
             var connection = new SignalRConnection();
-            
-            var connectionOptions = new ConnectionOptions("http://127.0.0.1:15117/signalr");
+
+            IClientLogger myLogger = new ClientConsoleLogger();
+            var connectionOptions = new ConnectionOptions("http://127.0.0.1:15117/signalr", myLogger);
             await connection.Connect(connectionOptions);
 
             var requestReceiver = new RequestReceiver(connection);
