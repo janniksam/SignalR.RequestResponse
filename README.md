@@ -59,16 +59,16 @@ Feel free to use dependency injection to build up the factory, it's all up to yo
 To open up a connection, there's a static **Connection**-class, you can use.
 
 ```
+var connection = new SignalRConnection();
 var connectionOptions = new ConnectionOptions("http://127.0.0.1:15117/signalr");
-await Connection.Connect(connectionOptions);
+await connection.Connect(connectionOptions);
 ```
 
 The connection should be established afterwards.
 Additionally, to send requests to the server and receive responses, you will have to use an instance of the class **RequestReceiver**.
 
 ```
-IRequestReceiver requestReceiver = new RequestReceiver();
-Connection.ResponseReceived += requestReceiver.OnResponseReceived;
+IRequestReceiver requestReceiver = new RequestReceiver(connection);
 ```
 
 The created **IRequestReceiver**-instance should be a reused as long as the client is connected to the server.
@@ -103,7 +103,7 @@ Both the server and the client support basic logging.
 
 ###Server logging
 
-To enable logging, you have to initialize the server with another parameter, which is the logger.
+To enable server logging, you have to initialize the server with another parameter, which is the logger.
 
 ```
 requestResponseServer.Init(new SimpleRequestHandlerFactory(), myLogger);
@@ -113,4 +113,10 @@ requestResponseServer.Init(new SimpleRequestHandlerFactory(), myLogger);
 
 ###Client logging
 
-Currently not supported, there is a IClientLogger-interface provided, but it isn't used so far.
+To enable client logging, you have to register a logger in the ```ConnectionOptions``` class.
+
+```
+var connectionOptions = new ConnectionOptions("http://127.0.0.1:15117/signalr", myLogger)
+```
+
+*myLogger* has to be an implementation of the provided ```IClientLogger``` interface.
