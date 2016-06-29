@@ -14,6 +14,7 @@ namespace SignalR.Request.Response.Client
     {
         private HubConnection m_requestResponseConnection;
         private IHubProxy m_proxy;
+        public EventHandler<SignalRResponse> ResponseReceived { get; set; }
 
         public IClientLogger Logger
         {
@@ -26,8 +27,6 @@ namespace SignalR.Request.Response.Client
                 return Options.Logger;
             }
         }
-
-        public EventHandler<SignalRResponse> ResponseReceived { get; set; }
 
         public bool IsInitialized
         {
