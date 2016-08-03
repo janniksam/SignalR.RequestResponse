@@ -97,6 +97,6 @@ namespace SignalR.Request.Response.Client
             return serializedResponse;
         }
 
-        public SignalRConnection Connection { get; }
+        public ISignalRConnection Connection => m_signalRConnection;
     }
 }
