@@ -17,5 +17,6 @@ namespace SignalR.Request.Response.Client
         void Close();
 
         void RemoveHeader(string key);
+        void AddOrUpdateHeader(string key, string value);
     }
 }
