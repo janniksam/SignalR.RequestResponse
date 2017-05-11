@@ -1,4 +1,4 @@
-#SignalR.RequestResponse Changelog
+# SignalR.RequestResponse Changelog
 
 **Latest stable version:** Not yet released.
 
