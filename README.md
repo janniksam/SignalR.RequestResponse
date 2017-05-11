@@ -28,7 +28,7 @@ requestResponseServer.Init(new SimpleRequestHandlerFactory());
 requestResponseServer.Run(serverUrl);
 ```
 
-The **RequestHandlerFactory** manages which handlers can process which request.
+The **RequestHandlerFactory** manages which RequestHandler is responsible for a given request.
 Here is an example implementation:
 
 ```
