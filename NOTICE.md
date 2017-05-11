@@ -1,10 +1,10 @@
-#IMPORTANT NOTICE:
+# IMPORTANT NOTICE:
 
 This open source project is using and is based on several other open source projects:
 
 ------
 
-#SignalR
+# SignalR
 URL: https://github.com/SignalR/SignalR
 
 >SignalR is licensed under the Apache 2.0 license.
@@ -17,7 +17,7 @@ URL: https://github.com/SignalR/SignalR
 >
 >Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
-#Owin Hosting
+# Owin Hosting
 URL: https://github.com/owin-contrib/owin-hosting
 
 >Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
@@ -28,7 +28,7 @@ URL: https://github.com/owin-contrib/owin-hosting
 >
 >Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
-#Newtonsoft.Json
+# Newtonsoft.Json
 
 URL: https://github.com/JamesNK/Newtonsoft.Json/
 
