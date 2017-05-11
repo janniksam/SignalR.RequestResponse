@@ -103,6 +103,20 @@ namespace SignalR.Request.Response.Client
             }
         }
 
+        public void RemoveHeader(string key)
+        {
+            if (Headers.ContainsKey(key))
+            {
+                Headers.Remove(key);
+            }
+        }
+
+        public void AddOrUpdateHeader(string key, string value)
+        {
+            RemoveHeader(key);
+            Headers.Add(key, value);
+        }
+
         public void SendReceive(SignalRRequest request)
         {
             if(request == null)
